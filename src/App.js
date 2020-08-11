@@ -10,16 +10,18 @@ import SubmitForm from './components/SubmitForm';
 import Error from './components/Error';
 import { HomePath, CreateFormPath, SubmitFormPath } from './constants/RoutePath';
 
+
 function App() {
-  return (
-    <Router>
-      <Switch>
-        <Route path={HomePath} component={Register} exact/>
-        <Route path={CreateFormPath} component={CreateForm} />
-        <Route path={SubmitFormPath} component={SubmitForm} />
-        <Route component={Error} />
-      </Switch>
-    </Router>
+
+  return (    
+      <Router>
+        <Switch>
+          <Route path={HomePath} component={Register} exact />
+          <Route path={CreateFormPath} component={CreateForm} />
+          <Route path={SubmitFormPath} component={SubmitForm} />
+          <Route component={Error} />
+        </Switch>
+      </Router>    
   );
 }
 
