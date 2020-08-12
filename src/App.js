@@ -14,7 +14,7 @@ import { HomePath, CreateFormPath, SubmitFormPath } from './constants/RoutePath'
 function App() {
 
   return (    
-      <Router basename={process.env.PUBLIC_URL}>
+      <Router>
         <Switch>
           <Route path={HomePath} component={Register} exact />
           <Route path={CreateFormPath} component={CreateForm} />
