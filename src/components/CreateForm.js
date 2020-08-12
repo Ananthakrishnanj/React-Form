@@ -17,15 +17,16 @@ function CreateForm() {
     const [interests, setInterests] = useState([]);
     const [addressType, setAddressType] = useState();
     const [subscribe, setSubscribe] = useState(false);
-    const [image, setImage] = useState(null);      
-    const [error, setError]  = useState(false);
+    const [image, setImage] = useState(null);
+    const [error, setError] = useState(false);
     const [imageError, setImageError] = useState(false);
-    let selector = useSelector(state => state.formData);    
+    const [firstNameError, setFirstNameError] = useState(false);
+    let selector = useSelector(state => state.formData);
     const navigate = useHistory();
     const dispatch = useDispatch();
 
     useEffect(() => {
-        if(selector) {
+        if (selector) {
             setAge(selector.age);
             setName(selector.name);
             setEmail(selector.email);
@@ -36,31 +37,41 @@ function CreateForm() {
             setInterests(selector.interests);
             setAddressType(selector.addressType);
             setSubscribe(selector.subscribe);
-            setImage(selector.image);            
+            setImage(selector.image);
         }
     }, []);
 
-    let validateForm = () => {        
+    let validateForm = () => {
         console.log("Validation form");
-        const formData = {age, name, address, email, telephone, country, state, interests, addressType, subscribe, image};        
-        dispatch({type : 'UPDATE_FORM_DATA', payload : formData});        
-        if(country && state && interests.length > 0 && addressType && image) {
+        const formData = { age, name, address, email, telephone, country, state, interests, addressType, subscribe, image };
+        dispatch({ type: 'UPDATE_FORM_DATA', payload: formData });
+        let regex = /^([a-zA-Z_-]){0,20}$/;
+
+        
+        if (country && state && interests.length > 0 && addressType && image && regex.test(name.firstName)) {
             navigate.push('/submit');
             setError(false);
-            setImageError(false);                
-        }     
+            setImageError(false);
+        }
         else {
-            if(image) {
+            if (image) {
                 setError(true);
             }
             else {
                 setImageError(true);
             }
-        } 
+        }
+
+        if (!(regex.test(name.firstName))) {
+            setFirstNameError(true);
+        }
+        else {
+            setFirstNameError(false);
+        }
     }
 
-    function uploadPhoto (e) {
-        e.preventDefault()        
+    function uploadPhoto(e) {
+        e.preventDefault()
     }
 
     function uploadSingleFile(e) {
@@ -69,29 +80,29 @@ function CreateForm() {
 
     return (
         <div className="container d-flex justify-content-center align-items-center min-vh-100">
-            <form onSubmit={(e) => {e.preventDefault();validateForm()}}>
+            <form onSubmit={(e) => { e.preventDefault(); validateForm() }}>
                 <div className="row">
 
 
-                    <div className="col-sm-3 text-center">          
-                        { image &&   
-                        <div>                      
-                        <div className="form-group">
-                            <img src={image} alt='' height="150px" width="150px"/>
-                        </div>
-                        <input type="file" accept="image/*" className="form-control" placeholder="Upload your photo" onChange={uploadSingleFile} />
-                        <button onClick={uploadPhoto} className="btn btn-link">Edit Photo</button>                           
-                        </div> 
+                    <div className="col-sm-3 text-center">
+                        {image &&
+                            <div>
+                                <div className="form-group">
+                                    <img src={image} alt='' height="150px" width="150px" />
+                                </div>
+                                <input type="file" accept="image/*" className="form-control" placeholder="Upload your photo" onChange={uploadSingleFile} />
+                                <button onClick={uploadPhoto} className="btn btn-link">Edit Photo</button>
+                            </div>
                         }
-                        { !image && 
-                        <div>                    
-                        <div className="upload-button">
-                            <input type="file" accept="image/*" className="form-control" placeholder="Upload your photo" onChange={uploadSingleFile} />
-                            <button onClick={uploadPhoto} className="btn btn-link text-white">Upload your photo</button>                        
-                        </div>
-                        <div className="upload-photo" onClick={uploadPhoto}>                        
-                        </div>
-                        </div>
+                        {!image &&
+                            <div>
+                                <div className="upload-button">
+                                    <input type="file" accept="image/*" className="form-control" placeholder="Upload your photo" onChange={uploadSingleFile} />
+                                    <button onClick={uploadPhoto} className="btn btn-link text-white">Upload your photo</button>
+                                </div>
+                                <div className="upload-photo" onClick={uploadPhoto}>
+                                </div>
+                            </div>
                         }
                         {imageError && !image &&
                             <div style={{ color: 'red' }}>Photo is required</div>
@@ -105,6 +116,10 @@ function CreateForm() {
                                 {error &&
                                     <div style={{ color: 'red' }} class="col-sm-12 offset-sm-3">All field in '*' are mandatory</div>
                                 }
+                                {firstNameError && 
+                                <div style={{ color: 'red' }} class="col-sm-12 offset-sm-3">First name should contain only aplhabets with maximum of 20 charcters</div>
+                                }
+
                             </div>
                             <div className="row form-group">
                                 <div className="col-sm-3 text-right">
@@ -162,12 +177,12 @@ function CreateForm() {
                                         <div className="col-sm-9">
                                             <Select
                                                 className="basic-single"
-                                                value = {{value: state, label: state}}
+                                                value={{ value: state, label: state }}
                                                 classNamePrefix="select"
                                                 name="State"
                                                 options={states.filter(item => item.countryID === country)[0]?.states}
                                                 onChange={(event) => setState(event.value)}
-                                            />                                            
+                                            />
                                         </div>
                                     </div>
                                 </div>
@@ -181,7 +196,7 @@ function CreateForm() {
                                         <div className="col-sm-9">
                                             <Select
                                                 className="basic-single"
-                                                value = {{value: country, label: country}}
+                                                value={{ value: country, label: country }}
                                                 classNamePrefix="select"
                                                 name="Country"
                                                 options={countries}
@@ -200,9 +215,9 @@ function CreateForm() {
                                         <div className="col-sm-9">
                                             <Select
                                                 className="basic-single"
-                                                value = {{value: addressType, label: addressType}}
+                                                value={{ value: addressType, label: addressType }}
                                                 classNamePrefix="select"
-                                                placeholder = "Select country"
+                                                placeholder="Select country"
                                                 name="Country"
                                                 options={addressTypes}
                                                 onChange={(event) => setAddressType(event.value)}
@@ -258,11 +273,11 @@ function CreateForm() {
                                                 className="basic-single"
                                                 classNamePrefix="select"
                                                 name="Country"
-                                                value = {interests}
+                                                value={interests}
                                                 options={interestsData}
                                                 isMulti
-                                                onChange={(value) => {setInterests(value)}}
-                                            />                                            
+                                                onChange={(value) => { setInterests(value) }}
+                                            />
                                         </div>
                                     </div>
                                 </div>
