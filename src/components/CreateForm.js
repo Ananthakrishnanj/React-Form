@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Slider from '../shared/Slider';
 import Select from 'react-select';
 import '../styles/createform.css';
@@ -10,23 +10,53 @@ function CreateForm() {
     const [age, setAge] = useState(13);
     const [name, setName] = useState({ firstName: '', secondName: '' });
     const [address, setAddress] = useState({ address1: '', address2: '' });
-    const [email, setEmail] = useState('');
-    const [telephone, setTelephone] = useState('');
-    const [country, setCountry] = useState('');
-    const [state, setState] = useState('');
-    const [interests, setInterests] = useState(null);
+    const [email, setEmail] = useState();
+    const [telephone, setTelephone] = useState();
+    const [country, setCountry] = useState();
+    const [state, setState] = useState();
+    const [interests, setInterests] = useState([]);
     const [addressType, setAddressType] = useState();
     const [subscribe, setSubscribe] = useState(false);
     const [image, setImage] = useState(null);      
+    const [error, setError]  = useState(false);
+    const [imageError, setImageError] = useState(false);
     let selector = useSelector(state => state.formData);    
     const navigate = useHistory();
     const dispatch = useDispatch();
 
+    useEffect(() => {
+        if(selector) {
+            setAge(selector.age);
+            setName(selector.name);
+            setEmail(selector.email);
+            setAddress(selector.address);
+            setTelephone(selector.telephone);
+            setCountry(selector.country);
+            setState(selector.state);
+            setInterests(selector.interests);
+            setAddressType(selector.addressType);
+            setSubscribe(selector.subscribe);
+            setImage(selector.image);            
+        }
+    }, []);
+
     let validateForm = () => {        
         console.log("Validation form");
-        const formData = {age, name, address, email, telephone, country, state, interests, addressType, subscribe, image};
+        const formData = {age, name, address, email, telephone, country, state, interests, addressType, subscribe, image};        
         dispatch({type : 'UPDATE_FORM_DATA', payload : formData});        
-        navigate.push('/submit');
+        if(country && state && interests.length > 0 && addressType && image) {
+            navigate.push('/submit');
+            setError(false);
+            setImageError(false);                
+        }     
+        else {
+            if(image) {
+                setError(true);
+            }
+            else {
+                setImageError(true);
+            }
+        } 
     }
 
     function uploadPhoto (e) {
@@ -43,14 +73,14 @@ function CreateForm() {
                 <div className="row">
 
 
-                    <div className="col-sm-3 text-center">
+                    <div className="col-sm-3 text-center">          
                         { image &&   
                         <div>                      
                         <div className="form-group">
                             <img src={image} alt='' height="150px" width="150px"/>
                         </div>
                         <input type="file" accept="image/*" className="form-control" placeholder="Upload your photo" onChange={uploadSingleFile} />
-                        <button onClick={uploadPhoto} className="btn btn-link">Change Photo</button>                           
+                        <button onClick={uploadPhoto} className="btn btn-link">Edit Photo</button>                           
                         </div> 
                         }
                         { !image && 
@@ -63,11 +93,19 @@ function CreateForm() {
                         </div>
                         </div>
                         }
+                        {imageError && !image &&
+                            <div style={{ color: 'red' }}>Photo is required</div>
+                        }
                     </div>
 
 
                     <div className="col-sm-9">
                         <div className="container-fluid">
+                            <div className="row form-group">
+                                {error &&
+                                    <div style={{ color: 'red' }} class="col-sm-12 offset-md-3">All field in '*' are mandatory</div>
+                                }
+                            </div>
                             <div className="row form-group">
                                 <div className="col-md-3 text-right">
                                     <span className="badge badge-default">Name</span>
@@ -85,7 +123,7 @@ function CreateForm() {
                             </div>
                             <div className="row form-group">
                                 <div className="col-md-3 text-right">
-                                    <span className="badge badge-default">Age</span>
+                                    <span className="badge">Age</span>
                                 </div>
                                 <div className="col-md-9">
                                     <Slider age={age} min={13} max={45} changeParentValue={(age) => setAge(age)}></Slider>
@@ -124,11 +162,12 @@ function CreateForm() {
                                         <div className="col-md-9">
                                             <Select
                                                 className="basic-single"
+                                                value = {{value: state, label: state}}
                                                 classNamePrefix="select"
                                                 name="State"
                                                 options={states.filter(item => item.countryID === country)[0]?.states}
                                                 onChange={(event) => setState(event.value)}
-                                            />
+                                            />                                            
                                         </div>
                                     </div>
                                 </div>
@@ -142,6 +181,7 @@ function CreateForm() {
                                         <div className="col-md-9">
                                             <Select
                                                 className="basic-single"
+                                                value = {{value: country, label: country}}
                                                 classNamePrefix="select"
                                                 name="Country"
                                                 options={countries}
@@ -160,7 +200,9 @@ function CreateForm() {
                                         <div className="col-md-9">
                                             <Select
                                                 className="basic-single"
+                                                value = {{value: addressType, label: addressType}}
                                                 classNamePrefix="select"
+                                                placeholder = "Select country"
                                                 name="Country"
                                                 options={addressTypes}
                                                 onChange={(event) => setAddressType(event.value)}
@@ -216,11 +258,11 @@ function CreateForm() {
                                                 className="basic-single"
                                                 classNamePrefix="select"
                                                 name="Country"
+                                                value = {interests}
                                                 options={interestsData}
                                                 isMulti
-                                                onChange={(event) => setInterests(event.value)}
-                                            />
-                                            {interests}
+                                                onChange={(value) => {setInterests(value)}}
+                                            />                                            
                                         </div>
                                     </div>
                                 </div>

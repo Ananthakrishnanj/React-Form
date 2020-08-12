@@ -1,5 +1,5 @@
 const initialState = {
-    formData: {}
+    formData: undefined
 }
 
 export default function rootReducer(state = initialState, action) {

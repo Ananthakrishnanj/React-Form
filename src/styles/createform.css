@@ -46,3 +46,8 @@
     top: 50px;
     left: 9px;
   }
+
+  .badge-default::after {
+    content: ' *';
+    color: red;
+  }
