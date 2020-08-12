@@ -103,63 +103,63 @@ function CreateForm() {
                         <div className="container-fluid">
                             <div className="row form-group">
                                 {error &&
-                                    <div style={{ color: 'red' }} class="col-sm-12 offset-md-3">All field in '*' are mandatory</div>
+                                    <div style={{ color: 'red' }} class="col-sm-12 offset-sm-3">All field in '*' are mandatory</div>
                                 }
                             </div>
                             <div className="row form-group">
-                                <div className="col-md-3 text-right">
+                                <div className="col-sm-3 text-right">
                                     <span className="badge badge-default">Name</span>
                                 </div>
-                                <div className="col-md-9">
+                                <div className="col-sm-9">
                                     <div className="row">
-                                        <div className="col-md-6">
+                                        <div className="col-sm-6">
                                             <input required type="text" placeholder="First Name" className="form-control" value={name.firstName} onChange={(event) => setName({ ...name, firstName: event.target.value })} />
                                         </div>
-                                        <div className="col-md-6">
+                                        <div className="col-sm-6">
                                             <input required type="text" placeholder="Second Name" className="form-control" value={name.secondName} onChange={(event) => setName({ ...name, secondName: event.target.value })} />
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div className="row form-group">
-                                <div className="col-md-3 text-right">
+                                <div className="col-sm-3 text-right">
                                     <span className="badge">Age</span>
                                 </div>
-                                <div className="col-md-9">
+                                <div className="col-sm-9">
                                     <Slider age={age} min={13} max={45} changeParentValue={(age) => setAge(age)}></Slider>
                                 </div>
                             </div>
                             <div className="row">
-                                <div className="col-md-12">
+                                <div className="col-sm-12">
                                     <div className="row form-group">
-                                        <div className="col-md-3 text-right">
+                                        <div className="col-sm-3 text-right">
                                             <span className="badge badge-default">Email</span>
                                         </div>
-                                        <div className="col-md-9">
+                                        <div className="col-sm-9">
                                             <input required type="email" className="form-control" value={email} onChange={(event) => setEmail(event.target.value)} />
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div className="row">
-                                <div className="col-md-12">
+                                <div className="col-sm-12">
                                     <div className="row form-group">
-                                        <div className="col-md-3 text-right">
+                                        <div className="col-sm-3 text-right">
                                             <span className="badge badge-default">Telephone</span>
                                         </div>
-                                        <div className="col-md-9">
+                                        <div className="col-sm-9">
                                             <input required type="text" className="form-control" value={telephone} onChange={(event) => setTelephone(event.target.value)} />
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div className="row">
-                                <div className="col-md-12">
+                                <div className="col-sm-12">
                                     <div className="row form-group">
-                                        <div className="col-md-3 text-right">
+                                        <div className="col-sm-3 text-right">
                                             <span className="badge badge-default">State</span>
                                         </div>
-                                        <div className="col-md-9">
+                                        <div className="col-sm-9">
                                             <Select
                                                 className="basic-single"
                                                 value = {{value: state, label: state}}
@@ -173,12 +173,12 @@ function CreateForm() {
                                 </div>
                             </div>
                             <div className="row">
-                                <div className="col-md-12">
+                                <div className="col-sm-12">
                                     <div className="row form-group">
-                                        <div className="col-md-3 text-right">
+                                        <div className="col-sm-3 text-right">
                                             <span className="badge badge-default">Country</span>
                                         </div>
-                                        <div className="col-md-9">
+                                        <div className="col-sm-9">
                                             <Select
                                                 className="basic-single"
                                                 value = {{value: country, label: country}}
@@ -192,12 +192,12 @@ function CreateForm() {
                                 </div>
                             </div>
                             <div className="row">
-                                <div className="col-md-12">
+                                <div className="col-sm-12">
                                     <div className="row form-group">
-                                        <div className="col-md-3 text-right">
+                                        <div className="col-sm-3 text-right">
                                             <span className="badge badge-default">Address</span>
                                         </div>
-                                        <div className="col-md-9">
+                                        <div className="col-sm-9">
                                             <Select
                                                 className="basic-single"
                                                 value = {{value: addressType, label: addressType}}
@@ -214,15 +214,15 @@ function CreateForm() {
                             {
                                 addressType === 'Home' &&
                                 <div className="row form-group">
-                                    <div className="col-md-3 text-right">
+                                    <div className="col-sm-3 text-right">
                                         <span className="badge badge-default">Home Address</span>
                                     </div>
-                                    <div className="col-md-9">
+                                    <div className="col-sm-9">
                                         <div className="row">
-                                            <div className="col-md-6">
+                                            <div className="col-sm-6">
                                                 <input required type="text" placeholder="Address 1" className="form-control" value={address.address1} onChange={(event) => setAddress({ ...address, address1: event.target.value })} />
                                             </div>
-                                            <div className="col-md-6">
+                                            <div className="col-sm-6">
                                                 <input required type="text" placeholder="Address 2" className="form-control" value={address.address2} onChange={(event) => setAddress({ ...address, address2: event.target.value })} />
                                             </div>
                                         </div>
@@ -232,15 +232,15 @@ function CreateForm() {
                             {
                                 addressType === 'Company' &&
                                 <div className="row form-group">
-                                    <div className="col-md-3 text-right">
+                                    <div className="col-sm-3 text-right">
                                         <span className="badge badge-default">Company Address</span>
                                     </div>
-                                    <div className="col-md-9">
+                                    <div className="col-sm-9">
                                         <div className="row">
-                                            <div className="col-md-6">
+                                            <div className="col-sm-6">
                                                 <input required type="text" placeholder="Company Address 1" className="form-control" value={address.address1} onChange={(event) => setAddress({ ...address, address1: event.target.value })} />
                                             </div>
-                                            <div className="col-md-6">
+                                            <div className="col-sm-6">
                                                 <input required type="text" placeholder="Company Address 2" className="form-control" value={address.address2} onChange={(event) => setAddress({ ...address, address2: event.target.value })} />
                                             </div>
                                         </div>
@@ -248,12 +248,12 @@ function CreateForm() {
                                 </div>
                             }
                             <div className="row">
-                                <div className="col-md-12">
+                                <div className="col-sm-12">
                                     <div className="row form-group">
-                                        <div className="col-md-3 text-right">
+                                        <div className="col-sm-3 text-right">
                                             <span className="badge badge-default">Interests</span>
                                         </div>
-                                        <div className="col-md-9">
+                                        <div className="col-sm-9">
                                             <Select
                                                 className="basic-single"
                                                 classNamePrefix="select"
@@ -268,15 +268,15 @@ function CreateForm() {
                                 </div>
                             </div>
                             <div className="row">
-                                <div className="col-md-3 text-right">
+                                <div className="col-sm-3 text-right">
                                     <input type="checkbox" checked={subscribe} onChange={(event) => setSubscribe(event.target.checked)} />
                                 </div>
-                                <div className="col-md-9">
+                                <div className="col-sm-9">
                                     <span>Subscribe to the news letter</span>
                                 </div>
                             </div>
                             <div className="row">
-                                <div className="col-md-12">
+                                <div className="col-sm-12">
                                     <div className="text-right">
                                         <button className="btn btn-primary btn-lg" type="submit">Submit</button>
                                     </div>
