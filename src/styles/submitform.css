@@ -46,3 +46,11 @@
   top: 50px;
   left: 9px;
 }
+
+.content-border {
+  border-left: 1px solid rgba(96, 149, 201,0.5);
+}
+
+.data-item {
+  color: #6095C9;
+}

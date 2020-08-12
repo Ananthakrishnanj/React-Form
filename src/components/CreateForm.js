@@ -99,7 +99,7 @@ function CreateForm() {
                     </div>
 
 
-                    <div className="col-sm-9">
+                    <div className="col-sm-9 content-border">
                         <div className="container-fluid">
                             <div className="row form-group">
                                 {error &&

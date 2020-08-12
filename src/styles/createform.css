@@ -38,7 +38,7 @@
     align-items: center;
     display: flex;
     border: 0.5px solid black;
-    background: #6095C9;
+    background: #6095c9;
   }
 
   .upload-button {
@@ -50,4 +50,8 @@
   .badge-default::after {
     content: ' *';
     color: red;
+  }
+
+  .content-border {
+    border-left: 1px solid rgba(96, 149, 201,0.5);
   }

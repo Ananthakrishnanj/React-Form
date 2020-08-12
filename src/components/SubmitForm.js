@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
+import '../styles/submitform.css';
 
 function SubmitForm() {    
     const dispatch = useDispatch();
     let selector = useSelector(state => state.formData);
     const navigate = useHistory();
+    
     if (!selector) {
         navigate.goBack();
     }
@@ -38,17 +40,18 @@ function SubmitForm() {
                     }
                     <button className="btn btn-link" onClick={goBack}>Edit profile</button>
                 </div>
-                <div className="col-sm-9">
-                    I am {selector.name.firstName} {selector.name.secondName} and I am above {selector.age} years and you can send your emails to {selector.email},
-                    I lives in the state of {selector.state} .I likes to play 
+                <div className="col-sm-9 content-border">
+                    I am <span className="data-item">{selector.name.firstName} {selector.name.secondName}</span> and I am <span className="data-item">above {selector.age} years</span> and you can send your emails to <span className="data-item">{selector.email}</span>,
+                    I lives in the state of {selector.state} .I likes to play&nbsp;
                     {selector.interests.map((interest, index) => {                    
                     return (
-                        <span>
-                            {interest.label}, 
+                        <span className="data-item">
+                            {interest.label}
+                            {index != selector.interests.length -1 && <span>, </span>}
                         </span>
                     )
                     })}.
-                    {selector.subscribe && <span>And please send me the news letters.</span>} Please reach out to me on my phone {selector.telephone}.
+                    {selector.subscribe && <span>And please send me the news letters.</span>} Please reach out to me on my phone <span className="data-item">{selector.telephone}</span>.
                     <div className="row">
                         <div className="col-md-12">
                             <div className="text-center mt-5">
