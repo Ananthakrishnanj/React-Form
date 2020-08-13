@@ -48,7 +48,7 @@ function CreateForm() {
         let regex = /^([a-zA-Z_-]){0,20}$/;
 
         
-        if (country && state && interests.length > 0 && addressType && image && regex.test(name.firstName)) {
+        if (country && state && (interests && interests?.length > 0) && addressType && image && regex.test(name.firstName)) {
             navigate.push('/submit');
             setError(false);
             setImageError(false);
