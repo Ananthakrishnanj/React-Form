@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import '../styles/slider.css';
-import { useState } from 'react';
 
 function Slider(props) {    
 
