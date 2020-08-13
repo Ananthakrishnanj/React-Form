@@ -31,9 +31,9 @@ function SubmitForm() {
                 <div className="col-sm-3 text-center">
                     {selector.image &&
                         <div>
-                            <div className="form-group">
-                                <img src={selector.image} alt='' height="150px" width="150px" />
-                            </div>
+                            <figure className="form-group">
+                                <img src={selector.image} alt='Image' height="150px" width="150px" />
+                            </figure>
                             <input type="file" accept="image/*" className="form-control" placeholder="Upload your photo" onChange={uploadSingleFile}/>
                             <button className="btn btn-link" onClick={uploadPhoto}>Edit photo</button>
                         </div>
@@ -55,7 +55,7 @@ function SubmitForm() {
                     <div className="row">
                         <div className="col-md-12">
                             <div className="text-center mt-5">
-                                <button className="btn btn-primary btn-lg" type="button" onClick={goBack}>Agree</button>
+                                <button className="btn btn-primary btn-lg" type="button">Agree</button>
                             </div>
                         </div>
                     </div>

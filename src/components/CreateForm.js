@@ -87,9 +87,9 @@ function CreateForm() {
                     <div className="col-sm-3 text-center">
                         {image &&
                             <div>
-                                <div className="form-group">
-                                    <img src={image} alt='' height="150px" width="150px" />
-                                </div>
+                                <figure className="form-group">
+                                    <img src={image} alt='Image' height="150px" width="150px" />
+                                </figure>
                                 <input type="file" accept="image/*" className="form-control" placeholder="Upload your photo" onChange={uploadSingleFile} />
                                 <button onClick={uploadPhoto} className="btn btn-link">Edit Photo</button>
                             </div>
@@ -123,7 +123,7 @@ function CreateForm() {
                             </div>
                             <div className="row form-group">
                                 <div className="col-sm-3 text-right">
-                                    <span className="badge badge-default">Name</span>
+                                    <label className="badge badge-default">Name</label>
                                 </div>
                                 <div className="col-sm-9">
                                     <div className="row">
@@ -138,7 +138,7 @@ function CreateForm() {
                             </div>
                             <div className="row form-group">
                                 <div className="col-sm-3 text-right">
-                                    <span className="badge">Age</span>
+                                    <label className="badge">Age</label>
                                 </div>
                                 <div className="col-sm-9">
                                     <Slider age={age} min={13} max={45} changeParentValue={(age) => setAge(age)}></Slider>
@@ -148,7 +148,7 @@ function CreateForm() {
                                 <div className="col-sm-12">
                                     <div className="row form-group">
                                         <div className="col-sm-3 text-right">
-                                            <span className="badge badge-default">Email</span>
+                                            <label className="badge badge-default">Email</label>
                                         </div>
                                         <div className="col-sm-9">
                                             <input required type="email" className="form-control" value={email} onChange={(event) => setEmail(event.target.value)} />
@@ -160,7 +160,7 @@ function CreateForm() {
                                 <div className="col-sm-12">
                                     <div className="row form-group">
                                         <div className="col-sm-3 text-right">
-                                            <span className="badge badge-default">Telephone</span>
+                                            <label className="badge badge-default">Telephone</label>
                                         </div>
                                         <div className="col-sm-9">
                                             <input required type="text" className="form-control" value={telephone} onChange={(event) => setTelephone(event.target.value)} />
@@ -172,7 +172,7 @@ function CreateForm() {
                                 <div className="col-sm-12">
                                     <div className="row form-group">
                                         <div className="col-sm-3 text-right">
-                                            <span className="badge badge-default">State</span>
+                                            <label className="badge badge-default">State</label>
                                         </div>
                                         <div className="col-sm-9">
                                             <Select
@@ -191,7 +191,7 @@ function CreateForm() {
                                 <div className="col-sm-12">
                                     <div className="row form-group">
                                         <div className="col-sm-3 text-right">
-                                            <span className="badge badge-default">Country</span>
+                                            <label className="badge badge-default">Country</label>
                                         </div>
                                         <div className="col-sm-9">
                                             <Select
@@ -210,7 +210,7 @@ function CreateForm() {
                                 <div className="col-sm-12">
                                     <div className="row form-group">
                                         <div className="col-sm-3 text-right">
-                                            <span className="badge badge-default">Address</span>
+                                            <label className="badge badge-default">Address</label>
                                         </div>
                                         <div className="col-sm-9">
                                             <Select
@@ -230,7 +230,7 @@ function CreateForm() {
                                 addressType === 'Home' &&
                                 <div className="row form-group">
                                     <div className="col-sm-3 text-right">
-                                        <span className="badge badge-default">Home Address</span>
+                                        <label className="badge badge-default">Home Address</label>
                                     </div>
                                     <div className="col-sm-9">
                                         <div className="row">
@@ -248,7 +248,7 @@ function CreateForm() {
                                 addressType === 'Company' &&
                                 <div className="row form-group">
                                     <div className="col-sm-3 text-right">
-                                        <span className="badge badge-default">Company Address</span>
+                                        <label className="badge badge-default">Company Address</label>
                                     </div>
                                     <div className="col-sm-9">
                                         <div className="row">
@@ -266,7 +266,7 @@ function CreateForm() {
                                 <div className="col-sm-12">
                                     <div className="row form-group">
                                         <div className="col-sm-3 text-right">
-                                            <span className="badge badge-default">Interests</span>
+                                            <label className="badge badge-default">Interests</label>
                                         </div>
                                         <div className="col-sm-9">
                                             <Select
@@ -284,10 +284,10 @@ function CreateForm() {
                             </div>
                             <div className="row">
                                 <div className="col-sm-3 text-right">
-                                    <input type="checkbox" checked={subscribe} onChange={(event) => setSubscribe(event.target.checked)} />
+                                    <input type="checkbox" id="subscribe" checked={subscribe} onChange={(event) => setSubscribe(event.target.checked)} />
                                 </div>
                                 <div className="col-sm-9">
-                                    <span>Subscribe to the news letter</span>
+                                    <label for="subscribe">Subscribe to the news letter</label>
                                 </div>
                             </div>
                             <div className="row">
