@@ -200,7 +200,7 @@ function CreateForm() {
                                                 classNamePrefix="select"
                                                 name="Country"
                                                 options={countries}
-                                                onChange={(event) => setCountry(event.value)}
+                                                onChange={(event) => {setState();setCountry(event.value);}}
                                             />
                                         </div>
                                     </div>
