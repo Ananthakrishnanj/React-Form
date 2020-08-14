@@ -45,7 +45,7 @@ function SubmitForm() {
                     I lives in the state of {selector.state} .I likes to play&nbsp;
                     {selector.interests.map((interest, index) => {                    
                     return (
-                        <span className="data-item">
+                        <span className="data-item" key={index}>
                             {interest.label}
                             {index != selector.interests.length -1 && <span>, </span>}
                         </span>
